@@ -13,6 +13,52 @@ Everything else is handled by the Next.js app. You only need to complete these *
 
 ---
 
+## 👤 Step 0 — User profile tables (Feature 1)
+
+Run this **once** in Supabase Dashboard → SQL Editor (after `supabase/setup.sql`):
+
+```sql
+-- Paste contents of supabase/user-profiles.sql and Run
+```
+
+This creates `users`, `user_details`, `rti_records`, and `detail_usage_history` with RLS policies.
+
+Verify:
+
+```bash
+npm run check-health
+```
+
+Look for `userProfiles: { ok: true, ... }` in the JSON output.
+
+Test the new API (with dev server running):
+
+```bash
+curl -s -X POST http://localhost:3000/api/user/create-detail \
+  -H "Content-Type: application/json" \
+  -d '{
+    "full_name": "Test User",
+    "email": "test@example.com",
+    "phone": "9876543210",
+    "street_address": "123 Test Street, Bangalore",
+    "state": "Karnataka",
+    "district": "Bengaluru Urban",
+    "postal_code": "560001"
+  }' | jq
+
+# Use the user_id from the response:
+curl -s "http://localhost:3000/api/user/details?user_id=PASTE_USER_ID" | jq
+```
+
+Run unit tests:
+
+```bash
+npm install
+npm test
+```
+
+---
+
 ## 🔑 Step 1 — Get a Groq API key (required for AI drafts)
 
 Gemini free quota is exhausted. Groq is free and takes ~2 minutes.
