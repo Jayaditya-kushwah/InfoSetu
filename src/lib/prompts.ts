@@ -15,6 +15,15 @@ Your role: Analyze the core entity of the citizen's grievance (e.g., roads, muni
 
 Return the full official department name (e.g., "Public Works Department / Municipal Corporation — Roads & Infrastructure").`;
 
+export const RTI_CATEGORIZATION_HINT = `RTI categories used by the platform:
+- transparency_issue: requests for documents, records, budgets, tenders
+- personal_information: citizen's own records or authorized personal data
+- public_service_complaint: water, electricity, sanitation, healthcare, education services
+- environmental_issue: pollution, contamination, waste, environmental harm
+- infrastructure_complaint: roads, bridges, buildings, drainage, physical damage
+
+When drafting, incorporate any additional RTI-specific context provided (office names, locations, dates, references).`;
+
 export const RTI_RESPONSE_FORMAT = `Respond with valid JSON only — no markdown fences, no extra text. Use this exact schema:
 {
   "target_department": "Full name of the responsible department/PIO office",
@@ -26,5 +35,6 @@ export const RTI_RESPONSE_FORMAT = `Respond with valid JSON only — no markdown
 export const RTI_SYSTEM_PROMPT = [
   LEGAL_DRAFTSMAN_PROMPT,
   DEPARTMENT_ROUTING_PROMPT,
+  RTI_CATEGORIZATION_HINT,
   RTI_RESPONSE_FORMAT,
 ].join("\n\n");

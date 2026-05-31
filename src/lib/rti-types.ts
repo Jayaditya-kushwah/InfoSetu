@@ -1,3 +1,6 @@
+import type { UserDetail } from "@/lib/user-types";
+import { buildApplicantBlock } from "@/lib/rti-template";
+
 export interface RTIDraft {
   subject: string;
   to: string;
@@ -17,7 +20,8 @@ export interface GenerateRTIResponse {
 }
 
 export function buildDraftFromAIResponse(
-  response: GenerateRTIResponse
+  response: GenerateRTIResponse,
+  userDetail?: UserDetail
 ): RTIDraft {
   const today = new Date().toLocaleDateString("en-IN", {
     day: "numeric",
@@ -25,10 +29,14 @@ export function buildDraftFromAIResponse(
     year: "numeric",
   });
 
+  const from = userDetail
+    ? buildApplicantBlock(userDetail)
+    : "[Applicant Name]\n[Complete Postal Address]\n[Contact Number]\n[Email Address]";
+
   return {
     subject: response.subject,
     to: `The Public Information Officer\n${response.target_department}\nGovernment of India / State Government\n[Office Address]`,
-    from: "[Applicant Name]\n[Complete Postal Address]\n[Contact Number]\n[Email Address]",
+    from,
     date: today,
     department: response.target_department,
     body: response.body,
