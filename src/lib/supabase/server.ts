@@ -1,5 +1,7 @@
 import { createClient, SupabaseClient } from "@supabase/supabase-js";
 
+import { testUserProfileTables } from "@/lib/supabase/user-details";
+
 function getProjectRefFromAnonKey(anonKey: string): string | null {
   try {
     const payloadSegment = anonKey.split(".")[1];
@@ -106,6 +108,7 @@ export async function testSupabaseConnection(): Promise<{
   ok: boolean;
   message: string;
   url?: string;
+  userProfiles?: { ok: boolean; message: string };
 }> {
   try {
     const { url, anonKey } = getSupabaseConfig();
@@ -127,7 +130,14 @@ export async function testSupabaseConnection(): Promise<{
       return { ok: false, message: error.message, url };
     }
 
-    return { ok: true, message: "Supabase connected and table exists.", url };
+    const userProfiles = await testUserProfileTables(supabase);
+
+    return {
+      ok: true,
+      message: "Supabase connected and table exists.",
+      url,
+      userProfiles,
+    };
   } catch (error) {
     return {
       ok: false,
