@@ -8,8 +8,12 @@ import type {
 } from "@/lib/user-types";
 
 function mapDbError(error: { message: string }, fallback: string): string {
-  if (/relation.*does not exist/i.test(error.message)) {
-    return "User profile tables not found. Run supabase/user-profiles.sql in your Supabase SQL Editor.";
+  if (
+    /relation.*does not exist|schema cache|could not find the table/i.test(
+      error.message
+    )
+  ) {
+    return "User profile tables not found. Run supabase/user-profiles.sql in Supabase Dashboard → SQL Editor, then retry.";
   }
   if (/row-level security|RLS|policy/i.test(error.message)) {
     return "Database access blocked by RLS. Run supabase/user-profiles.sql to configure policies.";
@@ -262,6 +266,49 @@ export async function deactivateUserDetail(
     user_detail_id: detailId,
     action: "deactivated",
   });
+
+  return { ok: true, data: data as UserDetail };
+}
+
+export async function setActiveUserDetail(
+  supabase: SupabaseClient,
+  userId: string,
+  detailId: string
+): Promise<DbResult<UserDetail>> {
+  const existing = await getUserDetailById(supabase, userId, detailId);
+  if (!existing.ok) return existing;
+  if (!existing.data) {
+    return { ok: false, error: "User detail not found" };
+  }
+
+  const { error: deactivateError } = await supabase
+    .from("user_details")
+    .update({ is_active: false })
+    .eq("user_id", userId)
+    .is("deleted_at", null);
+
+  if (deactivateError) {
+    return {
+      ok: false,
+      error: mapDbError(deactivateError, "Failed to update active profile"),
+    };
+  }
+
+  const { data, error } = await supabase
+    .from("user_details")
+    .update({ is_active: true })
+    .eq("id", detailId)
+    .eq("user_id", userId)
+    .is("deleted_at", null)
+    .select("*")
+    .single();
+
+  if (error) {
+    return {
+      ok: false,
+      error: mapDbError(error, "Failed to set active profile"),
+    };
+  }
 
   return { ok: true, data: data as UserDetail };
 }
