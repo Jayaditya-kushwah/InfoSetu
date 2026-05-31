@@ -23,6 +23,7 @@ Run this **once** in Supabase Dashboard → SQL Editor (after `supabase/setup.sq
 
 This creates `users`, `user_details`, `rti_records`, and `detail_usage_history` with RLS policies.
 
+Then run `supabase/rti-adaptive.sql` for RTI-specific questionnaire storage (Features 3–5).
 Verify:
 
 ```bash
