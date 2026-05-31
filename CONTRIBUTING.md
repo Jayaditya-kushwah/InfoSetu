@@ -1,15 +1,20 @@
 # Contributing to RTI-Ease
 
-Thank you for helping us improve civic transparency! 
+Thank you for helping us improve civic transparency!
 
 ## Code of Conduct
-Please maintain a collaborative, respectful, and productive environment during the hackathon.
+
+Please read [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) and maintain a collaborative, respectful environment.
 
 ## How to Contribute
-1. **Fork/Branch:** Create a feature branch from `main` (e.g., `git checkout -b feature/ai-prompt-tuning`).
-2. **Commit Guidelines:** Keep commit messages clear and concise (e.g., `feat: added PDF generation utility`).
-3. **Pull Requests:** Open a PR against the `main` branch with a brief summary of your changes.
+
+1. **Branch:** Create a feature branch from `master` (e.g. `git checkout -b feature/my-change`).
+2. **Pre-commit:** Install hooks with `pip install pre-commit && pre-commit install` (or use your system package).
+3. **Commits:** Use clear messages (e.g. `feat: add profile export`).
+4. **Checks:** Run `npm run lint`, `npm test`, and `npm run test:coverage` before opening a merge request.
+5. **Pull requests:** Open against `master` with a short summary of changes.
 
 ## Formatting Standards
-* Frontend: Follow standard ESLint/Prettier configurations.
-* Backend: Ensure PEP 8 compliance for Python code.
+
+- TypeScript/React: ESLint (`npm run lint`) and Prettier (`npm run format`)
+- Follow [.editorconfig](.editorconfig) for consistent indentation

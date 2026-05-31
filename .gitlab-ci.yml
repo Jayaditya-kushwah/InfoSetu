@@ -1,0 +1,62 @@
+# GitLab CI — RTI-Ease compliance pipeline
+stages:
+  - lint
+  - test
+  - security
+  - audit
+
+variables:
+  NODE_VERSION: "22"
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
+
+cache:
+  key: "${CI_COMMIT_REF_SLUG}"
+  paths:
+    - .npm/
+    - node_modules/
+
+default:
+  image: node:${NODE_VERSION}-alpine
+  before_script:
+    - npm ci
+
+lint:
+  stage: lint
+  script:
+    - npm run lint
+
+knip:
+  stage: lint
+  script:
+    - npm run knip
+  allow_failure: true
+
+test:
+  stage: test
+  script:
+    - npm run test:coverage
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    when: always
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
+
+dependency_audit:
+  stage: audit
+  script:
+    - npm audit --audit-level=high || true
+  allow_failure: true
+
+secret_scan:
+  stage: security
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . --verbose --redact
+  allow_failure: true

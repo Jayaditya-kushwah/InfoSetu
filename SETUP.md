@@ -100,6 +100,12 @@ Gemini free quota is exhausted. Groq is free and takes ~2 minutes.
 
 ---
 
+## License
+
+RTI-Ease is distributed under **AGPL-3.0-or-later**. See [LICENSE](LICENSE).
+
+---
+
 ## ❌ You do NOT need
 
 | Thing | Why |
