@@ -43,6 +43,26 @@
   --radius: 0.625rem;
 }
 
+/* Dark mode support */
+html.dark,
+:root.dark {
+  --background: oklch(0.178 0.031 264.236);
+  --foreground: oklch(0.97 0.01 251.813);
+  --card: oklch(0.223 0.032 263.903);
+  --card-foreground: oklch(0.97 0.01 251.813);
+  --primary: oklch(0.627 0.149 254.588);
+  --primary-foreground: oklch(0.178 0.031 264.236);
+  --secondary: oklch(0.278 0.034 257.611);
+  --secondary-foreground: oklch(0.97 0.01 251.813);
+  --muted: oklch(0.278 0.034 257.611);
+  --muted-foreground: oklch(0.709 0.035 261.825);
+  --accent: oklch(0.278 0.034 257.611);
+  --accent-foreground: oklch(0.97 0.01 251.813);
+  --border: oklch(0.278 0.034 257.611);
+  --input: oklch(0.278 0.034 257.611);
+  --ring: oklch(0.627 0.149 254.588);
+}
+
 @layer base {
   * {
     @apply border-border;
@@ -50,5 +70,11 @@
 
   body {
     @apply bg-background text-foreground antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  html.dark,
+  :root.dark {
+    color-scheme: dark;
   }
 }

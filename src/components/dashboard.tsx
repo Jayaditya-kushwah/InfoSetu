@@ -10,6 +10,8 @@ import {
 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
+import { PrintRTIButton } from "@/components/print-rti-button";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { RTIConfirmScreen } from "@/components/rti-confirm-screen";
 import { RTIHistoryPanel } from "@/components/rti-history-panel";
 import { RTIPreview } from "@/components/rti-preview";
@@ -307,6 +309,7 @@ export function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <Button
               variant="outline"
               size="sm"
@@ -458,20 +461,23 @@ export function Dashboard() {
                     auto-detected.
                   </CardDescription>
                 </div>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={handleDownload}
-                  disabled={!draft || isDownloading}
-                  className="shrink-0 border-slate-300 text-slate-700 hover:bg-slate-100"
-                >
-                  {isDownloading ? (
-                    <Loader2 className="animate-spin" />
-                  ) : (
-                    <Download />
-                  )}
-                  Download RTI as PDF
-                </Button>
+                <div className="flex shrink-0 gap-2">
+                  <PrintRTIButton disabled={!draft} />
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleDownload}
+                    disabled={!draft || isDownloading}
+                    className="shrink-0 border-slate-300 text-slate-700 hover:bg-slate-100"
+                  >
+                    {isDownloading ? (
+                      <Loader2 className="animate-spin" />
+                    ) : (
+                      <Download />
+                    )}
+                    Download RTI as PDF
+                  </Button>
+                </div>
               </div>
             </CardHeader>
             <CardContent className="flex flex-1 flex-col overflow-hidden p-4 pt-4">

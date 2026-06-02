@@ -1,0 +1,297 @@
+/**
+ * Phase 1A: Print-Friendly CSS
+ * Optimized styles for printing RTI drafts to PDF/paper
+ * 
+ * Usage: Browser print (Ctrl+P) or built-in "Print RTI" button
+ * Media Query: @media print
+ */
+
+@media print {
+  /* ============ HIDE INTERACTIVE ELEMENTS ============ */
+  nav,
+  header,
+  footer,
+  [role="navigation"],
+  .navbar,
+  .header,
+  .footer,
+  .chat-assistant,
+  .chat-widget,
+  .sidebar,
+  .rti-history-panel,
+  [class*="chat"],
+  [class*="sidebar"],
+  button,
+  .btn,
+  [class*="button"],
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  textarea,
+  select,
+  .action-bar,
+  .toolbar,
+  .profile-cards-row,
+  .grievance-input,
+  .adaptive-questionnaire,
+  .rti-confirm-screen,
+  .download-button,
+  .email-button,
+  .search-panel {
+    display: none !important;
+  }
+
+  /* ============ PAGE SETUP ============ */
+  html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: auto;
+    background: #ffffff;
+    color: #000;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  /* ============ PRINT PAGE BREAKS ============ */
+  @page {
+    size: A4;
+    margin: 20mm 15mm;
+  }
+
+  /* ============ CONTENT CONTAINERS ============ */
+  #rti-preview-container,
+  [data-rti-preview],
+  .rti-preview {
+    display: block !important;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    box-shadow: none !important;
+  }
+
+  #rti-preview-sheet,
+  .rti-preview-sheet {
+    display: block !important;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    box-shadow: none !important;
+    border: none !important;
+    page-break-inside: avoid;
+    box-sizing: border-box;
+  }
+
+  /* ============ TYPOGRAPHY ============ */
+  h1 {
+    font-size: 16pt;
+    font-weight: bold;
+    margin: 12pt 0;
+    page-break-after: avoid;
+    line-height: 1.4;
+  }
+
+  h2 {
+    font-size: 14pt;
+    font-weight: bold;
+    margin: 10pt 0 6pt 0;
+    page-break-after: avoid;
+    line-height: 1.4;
+  }
+
+  h3 {
+    font-size: 12pt;
+    font-weight: bold;
+    margin: 8pt 0 4pt 0;
+    page-break-after: avoid;
+    line-height: 1.4;
+  }
+
+  p {
+    margin: 6pt 0;
+    line-height: 1.5;
+    widows: 2;
+    orphans: 2;
+  }
+
+  /* ============ LISTS ============ */
+  ul,
+  ol {
+    margin: 6pt 0;
+    padding-left: 20pt;
+    list-style-position: outside;
+  }
+
+  li {
+    margin: 4pt 0;
+    page-break-inside: avoid;
+    line-height: 1.5;
+  }
+
+  /* ============ RTI SPECIFIC SECTIONS ============ */
+  .rti-header,
+  .rti-salutation {
+    margin-bottom: 12pt;
+    page-break-after: avoid;
+  }
+
+  .rti-subject {
+    font-weight: bold;
+    margin: 8pt 0;
+    page-break-after: avoid;
+  }
+
+  .rti-section {
+    margin: 10pt 0;
+    page-break-inside: avoid;
+  }
+
+  .rti-questions,
+  .rti-body {
+    margin: 8pt 0;
+  }
+
+  .rti-question {
+    margin: 6pt 0;
+    page-break-inside: avoid;
+  }
+
+  .rti-footer,
+  .rti-closing,
+  .rti-fee-note,
+  .rti-applicant-block {
+    margin-top: 12pt;
+    page-break-before: avoid;
+    page-break-after: avoid;
+  }
+
+  /* ============ SPACING & BREAKS ============ */
+  .page-break {
+    page-break-before: always;
+    display: block;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  .section-break {
+    page-break-inside: avoid;
+    margin: 12pt 0;
+  }
+
+  /* ============ TABLES ============ */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8pt 0;
+    page-break-inside: avoid;
+  }
+
+  th,
+  td {
+    border: 1pt solid #000;
+    padding: 4pt 6pt;
+    text-align: left;
+    font-size: 11pt;
+  }
+
+  th {
+    background: #f5f5f5;
+    font-weight: bold;
+  }
+
+  /* ============ LINKS ============ */
+  a,
+  a:link,
+  a:visited {
+    color: #000;
+    text-decoration: underline;
+    word-break: break-word;
+  }
+
+  a[href]:after {
+    content: none;
+  }
+
+  /* ============ SPECIAL CHARACTERS ============ */
+  .currency:before {
+    content: "₹ ";
+  }
+
+  /* ============ ACCESSIBILITY ============ */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  hr {
+    border: none;
+    border-top: 1pt solid #000;
+    margin: 8pt 0;
+  }
+
+  /* ============ BACKGROUND COLORS ============ */
+  .bg-blue-50,
+  .bg-gray-50,
+  [class*="bg-"] {
+    background-color: transparent !important;
+  }
+
+  /* ============ TEXT COLORS ============ */
+  .text-gray-600,
+  .text-gray-500,
+  [class*="text-"] {
+    color: #000 !important;
+  }
+
+  /* ============ DARK MODE OVERRIDES ============ */
+  body.dark,
+  html.dark {
+    background: #ffffff;
+    color: #000;
+  }
+
+  body.dark *,
+  html.dark * {
+    background: transparent !important;
+    color: #000 !important;
+  }
+
+  /* ============ LAST PAGE HANDLING ============ */
+  *:last-child {
+    page-break-after: avoid;
+  }
+}
+
+/* ============ PRINT MEDIA SPECIFIC (non-print preview) ============ */
+@media print and (color) {
+  /* Ensure black and white printing works well */
+  body {
+    color: #000;
+    background: #fff;
+  }
+}
+
+/* ============ LANDSCAPE SUPPORT (optional) ============ */
+@media print and (orientation: landscape) {
+  @page {
+    size: A4 landscape;
+    margin: 15mm 20mm;
+  }
+
+  body {
+    font-size: 11pt;
+  }
+}
