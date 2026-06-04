@@ -119,11 +119,7 @@ export async function testGeminiConnection(): Promise<{
 
   try {
     const model = GEMINI_MODELS[0];
-    await callGeminiModel(
-      apiKey,
-      model,
-      'Test: reply with JSON {"status":"ok"}'
-    );
+    await callGeminiModel(apiKey, model, 'Test: reply with JSON {"status":"ok"}');
     return { ok: true, message: "Gemini API is working.", model };
   } catch (error) {
     return { ok: false, message: friendlyLLMError(error, "gemini") };

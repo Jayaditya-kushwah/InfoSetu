@@ -1,9 +1,9 @@
 /**
  * Phase 0: Safety Baseline - Regression Test Checklist
- * 
+ *
  * This file documents the baseline behavior that must remain unchanged.
  * Run these checks manually and via automated tests after each phase.
- * 
+ *
  * PHASE 0 BASELINE SNAPSHOT (May 31, 2026)
  * - Build: ✅ Passes (next build)
  * - Tests: ✅ 34 tests pass (vitest)
@@ -24,18 +24,15 @@ export const REGRESSION_CHECKLIST = {
     testsPasses: "npm test passes all 34 tests",
 
     // Core RTI Generation Flow
-    grievanceInput:
-      "User can input plain language grievance (English or Hindi)",
+    grievanceInput: "User can input plain language grievance (English or Hindi)",
     departmentDetection:
       "System auto-detects department from grievance (e.g., roads → PWD)",
-    categoryDetection:
-      "System auto-detects RTI category (e.g., infrastructure)",
+    categoryDetection: "System auto-detects RTI category (e.g., infrastructure)",
     adaptiveQuestionnaire:
       "Category-specific follow-up questions display based on grievance type",
     rtiConfirmation:
       "User can review RTI details before generation (name, email, address)",
-    rtiGeneration:
-      "LLM generates legally compliant RTI draft from grievance + answers",
+    rtiGeneration: "LLM generates legally compliant RTI draft from grievance + answers",
     pdfExport: "User can download generated RTI as PDF with proper formatting",
 
     // User Profile Management
@@ -45,20 +42,17 @@ export const REGRESSION_CHECKLIST = {
     profileSwitch: "User can switch between multiple profiles",
     profileEdit: "User can edit existing profile details",
     profileDelete: "User can delete profile (with confirmation)",
-    profilePersistence:
-      "Profile data persists across sessions (Supabase storage)",
+    profilePersistence: "Profile data persists across sessions (Supabase storage)",
 
     // History & Tracking
     historyPanel:
       "Past RTIs appear in 'Past RTIs' panel with metadata (date, dept, category)",
-    historyPersistence:
-      "RTI history persists across sessions and page reloads",
+    historyPersistence: "RTI history persists across sessions and page reloads",
 
     // LLM Integration
     llmFallback:
       "If primary LLM fails, system attempts alternate provider (Groq ↔ Gemini)",
-    llmErrorHandling:
-      "User sees helpful error message if all LLM providers fail",
+    llmErrorHandling: "User sees helpful error message if all LLM providers fail",
 
     // UI/UX
     noJSErrors: "No JavaScript errors in browser console during normal usage",
@@ -68,16 +62,14 @@ export const REGRESSION_CHECKLIST = {
 
   // Phase 1: Quick Wins (no regression)
   phase1: {
-    phase0Maintained:
-      "All Phase 0 checks still pass (with new features disabled)",
+    phase0Maintained: "All Phase 0 checks still pass (with new features disabled)",
     newFeaturesOptional:
       "New Phase 1 features do not interfere with existing flow when disabled",
   },
 
   // Feature Flag Verification
   featureFlags: {
-    allDisabled:
-      "System works correctly when all feature flags are set to false",
+    allDisabled: "System works correctly when all feature flags are set to false",
     flagsIndependent:
       "Each feature flag can be toggled independently without affecting others",
   },
@@ -96,7 +88,8 @@ export const MANUAL_REGRESSION_STEPS = [
   },
   {
     step: 2,
-    action: 'Enter profile details (Name: Test User, Email: test@example.com, Phone: 9876543210, Address: "Test Lane", State: Maharashtra, District: Pune, PIN: 411001)',
+    action:
+      'Enter profile details (Name: Test User, Email: test@example.com, Phone: 9876543210, Address: "Test Lane", State: Maharashtra, District: Pune, PIN: 411001)',
     expected: "Profile saved, card appears in top section",
   },
   {
@@ -120,20 +113,16 @@ export const MANUAL_REGRESSION_STEPS = [
   {
     step: 6,
     action: "Click 'Download RTI as PDF'",
-    expected:
-      "PDF downloads with filename like RTI_*.pdf, opens correctly in viewer",
+    expected: "PDF downloads with filename like RTI_*.pdf, opens correctly in viewer",
   },
   {
     step: 7,
-    action:
-      "Hard refresh page (Ctrl+Shift+R), create second profile, switch profiles",
-    expected:
-      "Both profiles visible, can switch and file new RTI with second profile",
+    action: "Hard refresh page (Ctrl+Shift+R), create second profile, switch profiles",
+    expected: "Both profiles visible, can switch and file new RTI with second profile",
   },
   {
     step: 8,
-    action:
-      "Check 'Past RTIs' panel (if RTIs were previously created in this session)",
+    action: "Check 'Past RTIs' panel (if RTIs were previously created in this session)",
     expected: "History shows date, department, category, profile used",
   },
   {
@@ -155,20 +144,17 @@ export const PHASE_0_EXIT_CRITERIA = [
   {
     criterion: "npm test passes (all 34 tests)",
     status: "✅ VERIFIED",
-    notes:
-      "5 test files, 34 tests total, no failures; expect same after Phase 1",
+    notes: "5 test files, 34 tests total, no failures; expect same after Phase 1",
   },
   {
     criterion: "Core RTI generation flow unchanged with feature flags OFF",
     status: "⏳ PENDING",
-    notes:
-      "Manual verification needed after implementing Phase 0 feature flag system",
+    notes: "Manual verification needed after implementing Phase 0 feature flag system",
   },
   {
     criterion: "Current user flow works with all new flags OFF",
     status: "⏳ PENDING",
-    notes:
-      "Run manual regression checklist with all Phase 1+ flags disabled",
+    notes: "Run manual regression checklist with all Phase 1+ flags disabled",
   },
   {
     criterion: "Existing tests still pass after Phase 1 implementation",

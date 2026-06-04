@@ -56,11 +56,7 @@ export async function ensureUser(
     return { ok: true, data: { user_id: created.id } };
   }
 
-  const { data, error } = await supabase
-    .from("users")
-    .insert({})
-    .select("id")
-    .single();
+  const { data, error } = await supabase.from("users").insert({}).select("id").single();
 
   if (error) {
     return { ok: false, error: mapDbError(error, "Failed to create user") };
@@ -189,11 +185,7 @@ export async function updateUserDetail(
     input: Partial<UserDetailInput>;
   }
 ): Promise<DbResult<UserDetail>> {
-  const existing = await getUserDetailById(
-    supabase,
-    params.user_id,
-    params.detail_id
-  );
+  const existing = await getUserDetailById(supabase, params.user_id, params.detail_id);
 
   if (!existing.ok) {
     return existing;

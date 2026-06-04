@@ -148,7 +148,14 @@ export const RTI_FORM_TEMPLATES: Record<RTICategory, RTIFormField[]> = {
       id: "relation_to_person",
       label: "Your relation to the person?",
       type: "select",
-      options: ["Self", "Parent", "Spouse", "Child", "Legal heir", "Authorized representative"],
+      options: [
+        "Self",
+        "Parent",
+        "Spouse",
+        "Child",
+        "Legal heir",
+        "Authorized representative",
+      ],
       required: true,
     },
     {
@@ -170,7 +177,15 @@ export const RTI_FORM_TEMPLATES: Record<RTICategory, RTIFormField[]> = {
       id: "service_type",
       label: "Which public service?",
       type: "select",
-      options: ["Water", "Electricity", "Roads", "Sanitation", "Healthcare", "Education", "Other"],
+      options: [
+        "Water",
+        "Electricity",
+        "Roads",
+        "Sanitation",
+        "Healthcare",
+        "Education",
+        "Other",
+      ],
       required: true,
     },
     {

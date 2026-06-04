@@ -6,10 +6,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { InputField } from "@/components/user-detail/input-field";
 import { SelectField } from "@/components/user-detail/select-field";
 import { Button } from "@/components/ui/button";
-import {
-  INDIAN_STATES_AND_UTS,
-  getDistrictsForState,
-} from "@/lib/indian-locations";
+import { INDIAN_STATES_AND_UTS, getDistrictsForState } from "@/lib/indian-locations";
 import type { UserDetail } from "@/lib/user-types";
 import { getStoredUserId, setStoredUserId } from "@/lib/user-session";
 import {
@@ -39,12 +36,8 @@ export function UserDetailForm({
     ...EMPTY_USER_DETAIL_FORM,
     ...initialValues,
   });
-  const [errors, setErrors] = useState<Partial<Record<UserDetailField, string>>>(
-    {}
-  );
-  const [touched, setTouched] = useState<Partial<Record<UserDetailField, boolean>>>(
-    {}
-  );
+  const [errors, setErrors] = useState<Partial<Record<UserDetailField, string>>>({});
+  const [touched, setTouched] = useState<Partial<Record<UserDetailField, boolean>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
@@ -73,13 +66,16 @@ export function UserDetailForm({
     }));
   }, []);
 
-  const markTouched = useCallback((field: UserDetailField) => {
-    setTouched((current) => ({ ...current, [field]: true }));
-    setErrors((current) => ({
-      ...current,
-      [field]: validateUserDetailField(field, values[field]),
-    }));
-  }, [values]);
+  const markTouched = useCallback(
+    (field: UserDetailField) => {
+      setTouched((current) => ({ ...current, [field]: true }));
+      setErrors((current) => ({
+        ...current,
+        [field]: validateUserDetailField(field, values[field]),
+      }));
+    },
+    [values]
+  );
 
   const visibleError = useCallback(
     (field: UserDetailField) =>
@@ -153,9 +149,7 @@ export function UserDetailForm({
         if ("fieldErrors" in data && data.fieldErrors) {
           setErrors(data.fieldErrors as Partial<Record<UserDetailField, string>>);
         }
-        throw new Error(
-          "error" in data ? data.error : "Failed to save user details"
-        );
+        throw new Error("error" in data ? data.error : "Failed to save user details");
       }
 
       const successData = data as {
@@ -183,9 +177,7 @@ export function UserDetailForm({
       <section className="space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
           <User className="h-4 w-4 text-blue-700" />
-          <h3 className="text-sm font-semibold text-slate-900">
-            Personal Information
-          </h3>
+          <h3 className="text-sm font-semibold text-slate-900">Personal Information</h3>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="sm:col-span-2">
@@ -230,9 +222,7 @@ export function UserDetailForm({
       <section className="space-y-4">
         <div className="flex items-center gap-2 border-b border-slate-100 pb-2">
           <MapPin className="h-4 w-4 text-blue-700" />
-          <h3 className="text-sm font-semibold text-slate-900">
-            Address Information
-          </h3>
+          <h3 className="text-sm font-semibold text-slate-900">Address Information</h3>
         </div>
         <InputField
           id="street_address"
@@ -276,15 +266,11 @@ export function UserDetailForm({
             onChange={(value) => setFieldValue("district", value)}
             onBlur={() => markTouched("district")}
             options={districtOptions}
-            placeholder={
-              values.state ? "Select district" : "Select state first"
-            }
+            placeholder={values.state ? "Select district" : "Select state first"}
             error={visibleError("district")}
             disabled={!values.state}
             hint={
-              values.state
-                ? `${districtOptions.length} districts available`
-                : undefined
+              values.state ? `${districtOptions.length} districts available` : undefined
             }
           />
           <InputField

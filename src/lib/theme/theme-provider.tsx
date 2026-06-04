@@ -1,7 +1,7 @@
 /**
  * Phase 1B: Dark Mode Support
  * Theme Provider for RTI-Ease using React Context
- * 
+ *
  * Persists theme preference in localStorage
  * Supports: 'light' | 'dark' | 'system' (default)
  */
@@ -111,16 +111,16 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
 export function useTheme(): ThemeContextType {
   const context = useContext(ThemeContext);
-  
+
   // During SSR/static generation, return default values
   if (typeof window === "undefined") {
     return DEFAULT_THEME;
   }
-  
+
   // On client, context should always be available, but provide fallback
   if (context === undefined) {
     return DEFAULT_THEME;
   }
-  
+
   return context;
 }

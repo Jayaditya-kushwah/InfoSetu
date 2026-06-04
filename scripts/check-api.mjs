@@ -63,7 +63,9 @@ if (provider === "groq") {
   if (!isValidGeminiKey(key)) {
     console.warn("⚠️  Key format unusual — expected AIza… or AQ.…");
   } else {
-    console.log(`✅ Key format OK (${key.startsWith("AQ.") ? "AQ. (new format)" : "AIza (legacy)"})`);
+    console.log(
+      `✅ Key format OK (${key.startsWith("AQ.") ? "AQ. (new format)" : "AIza (legacy)"})`
+    );
   }
 }
 

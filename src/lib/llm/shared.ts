@@ -49,9 +49,7 @@ export function isValidGeminiKey(key: string): boolean {
 
 export function isQuotaOrRateLimitError(error: unknown): boolean {
   const message = error instanceof Error ? error.message : String(error);
-  return /429|quota|rate.?limit|too many requests|resource exhausted/i.test(
-    message
-  );
+  return /429|quota|rate.?limit|too many requests|resource exhausted/i.test(message);
 }
 
 export function isAuthError(error: unknown): boolean {
@@ -74,9 +72,7 @@ export function friendlyLLMError(error: unknown, provider: LLMProvider): string 
     return "Gemini quota exceeded. Switch to Groq (free): set LLM_PROVIDER=groq and GROQ_API_KEY in .env — see https://console.groq.com/keys";
   }
 
-  return error instanceof Error
-    ? error.message
-    : "Failed to generate RTI draft.";
+  return error instanceof Error ? error.message : "Failed to generate RTI draft.";
 }
 
 export { RTI_SYSTEM_PROMPT };

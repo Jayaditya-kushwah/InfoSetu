@@ -15,7 +15,7 @@ const searchSchema = z.object({
 /**
  * Phase 1C: Search Past RTIs
  * GET /api/rti/search
- * 
+ *
  * Search through past RTI applications with keyword + filters
  * Uses Supabase PostgreSQL full-text search
  */
@@ -45,8 +45,7 @@ export async function GET(request: Request) {
     }
 
     const supabase = await createSupabaseServerClient();
-    const { q, department, category, fromDate, toDate, limit, offset } =
-      params.data;
+    const { q, department, category, fromDate, toDate, limit, offset } = params.data;
 
     // Build base query with text search
     let query = supabase
@@ -94,14 +93,11 @@ export async function GET(request: Request) {
     const results = (data || []).map((rti: any) => {
       // Create excerpt from user_input (first 150 chars)
       const fullText = rti.user_input || rti.generated_draft || "";
-      const excerpt = fullText
-        .substring(0, 150)
-        .trim();
+      const excerpt = fullText.substring(0, 150).trim();
 
       return {
         id: rti.id,
-        subject:
-          rti.target_department || "RTI Application",
+        subject: rti.target_department || "RTI Application",
         createdAt: rti.created_at,
         department: rti.target_department,
         category: rti.category,
@@ -120,9 +116,6 @@ export async function GET(request: Request) {
     });
   } catch (error) {
     console.error("[RTI Search] Error:", error);
-    return NextResponse.json(
-      { error: "Search failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Search failed" }, { status: 500 });
   }
 }

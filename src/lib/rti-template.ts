@@ -1,7 +1,10 @@
 import type { UserDetail } from "@/lib/user-types";
 import type { RTIDraft } from "@/lib/rti-types";
 
-const PLACEHOLDER_PATTERNS: Array<{ pattern: RegExp; replace: (d: UserDetail) => string }> = [
+const PLACEHOLDER_PATTERNS: Array<{
+  pattern: RegExp;
+  replace: (d: UserDetail) => string;
+}> = [
   { pattern: /\[Applicant Name\]/gi, replace: (d) => d.full_name },
   { pattern: /\[your name\]/gi, replace: (d) => d.full_name },
   { pattern: /\[Complete Postal Address\]/gi, replace: (d) => formatAddress(d) },
@@ -28,10 +31,7 @@ function replacePlaceholders(text: string, detail: UserDetail): string {
   return result;
 }
 
-export function injectUserDataIntoDraft(
-  draft: RTIDraft,
-  detail: UserDetail
-): RTIDraft {
+export function injectUserDataIntoDraft(draft: RTIDraft, detail: UserDetail): RTIDraft {
   return {
     ...draft,
     from: buildApplicantBlock(detail),

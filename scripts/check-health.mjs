@@ -71,7 +71,9 @@ try {
       console.log("  4. Restart: npm run dev");
       console.log("  5. Re-run: npm run check-health\n");
     } else {
-      console.log("  Groq key is set but failing — create a new key at console.groq.com/keys\n");
+      console.log(
+        "  Groq key is set but failing — create a new key at console.groq.com/keys\n"
+      );
     }
   }
 
@@ -81,7 +83,9 @@ try {
   }
 
   if (data.ok) {
-    console.log("✅ App is usable (database + offline drafts). Add Groq key for AI drafts.\n");
+    console.log(
+      "✅ App is usable (database + offline drafts). Add Groq key for AI drafts.\n"
+    );
     console.log("   Open http://localhost:3000\n");
     process.exit(0);
   }

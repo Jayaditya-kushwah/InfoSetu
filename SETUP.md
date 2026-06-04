@@ -108,12 +108,12 @@ RTI-Ease is distributed under **AGPL-3.0-or-later**. See [LICENSE](LICENSE).
 
 ## ❌ You do NOT need
 
-| Thing | Why |
-|-------|-----|
-| Separate Python/FastAPI server | Next.js `/api/generate-rti` is the backend |
-| New Supabase project | Already connected |
-| `AIza` Gemini key | `AQ.` keys are valid; quota is the issue, not the key format |
-| Deploy anywhere yet | Local dev is fully functional |
+| Thing                          | Why                                                          |
+| ------------------------------ | ------------------------------------------------------------ |
+| Separate Python/FastAPI server | Next.js `/api/generate-rti` is the backend                   |
+| New Supabase project           | Already connected                                            |
+| `AIza` Gemini key              | `AQ.` keys are valid; quota is the issue, not the key format |
+| Deploy anywhere yet            | Local dev is fully functional                                |
 
 ---
 

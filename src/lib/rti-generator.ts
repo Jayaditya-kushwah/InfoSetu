@@ -19,39 +19,30 @@ function extractSubject(grievance: string): string {
 
 function detectDepartment(grievance: string): string {
   const lower = grievance.toLowerCase();
-  const hindiRoad =
-    /सड़क|रोड|गड्ढ|footpath|pothole|road|street|highway|bridge/.test(
-      lower + grievance
-    );
-  const water =
-    /water|पानी|jal|supply|pipeline|sewer|drainage|नाल/.test(
-      lower + grievance
-    );
-  const education =
-    /school|शिक्ष|college|university|teacher|mid-day meal/.test(
-      lower + grievance
-    );
-  const health =
-    /hospital|health|doctor|ambulance|आरोग्य|चिकित्स/.test(
-      lower + grievance
-    );
-  const environment =
-    /pollution|environment|tree|forest|waste|garbage|कचर|प्रदूष/.test(
-      lower + grievance
-    );
-  const budget =
-    /budget|fund|expenditure|audit|corruption|bribe|घोटाल|भ्रष्ट/.test(
-      lower + grievance
-    );
+  const hindiRoad = /सड़क|रोड|गड्ढ|footpath|pothole|road|street|highway|bridge/.test(
+    lower + grievance
+  );
+  const water = /water|पानी|jal|supply|pipeline|sewer|drainage|नाल/.test(
+    lower + grievance
+  );
+  const education = /school|शिक्ष|college|university|teacher|mid-day meal/.test(
+    lower + grievance
+  );
+  const health = /hospital|health|doctor|ambulance|आरोग्य|चिकित्स/.test(
+    lower + grievance
+  );
+  const environment = /pollution|environment|tree|forest|waste|garbage|कचर|प्रदूष/.test(
+    lower + grievance
+  );
+  const budget = /budget|fund|expenditure|audit|corruption|bribe|घोटाल|भ्रष्ट/.test(
+    lower + grievance
+  );
 
   if (hindiRoad)
     return "Public Works Department / Municipal Corporation — Roads & Infrastructure";
-  if (water)
-    return "Jal Board / Municipal Water Supply Department";
-  if (education)
-    return "Department of Education / District Education Officer";
-  if (health)
-    return "Department of Health & Family Welfare";
+  if (water) return "Jal Board / Municipal Water Supply Department";
+  if (education) return "Department of Education / District Education Officer";
+  if (health) return "Department of Health & Family Welfare";
   if (environment)
     return "State Pollution Control Board / Municipal Sanitation Department";
   if (budget)

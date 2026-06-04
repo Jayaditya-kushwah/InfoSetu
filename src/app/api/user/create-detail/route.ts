@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 
 import { createSupabaseServerClient } from "@/lib/supabase/server";
-import {
-  createUserDetail,
-  ensureUser,
-} from "@/lib/supabase/user-details";
+import { createUserDetail, ensureUser } from "@/lib/supabase/user-details";
 import {
   createUserDetailRequestSchema,
   formatZodErrors,
@@ -54,9 +51,6 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     console.error("create-detail error:", error);
-    return NextResponse.json(
-      { error: "Invalid request body" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Invalid request body" }, { status: 400 });
   }
 }

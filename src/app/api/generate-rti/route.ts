@@ -1,10 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 
-import {
-  formatCategoryAnswersForPrompt,
-  RTI_CATEGORIES,
-} from "@/lib/rti-categories";
+import { formatCategoryAnswersForPrompt, RTI_CATEGORIES } from "@/lib/rti-categories";
 import {
   friendlyLLMErrorForActiveProvider,
   generateRTI,
@@ -68,11 +65,7 @@ export async function POST(request: Request) {
     let userDetail = null;
     if (user_id && user_detail_id) {
       const supabase = createSupabaseServerClient();
-      const detailResult = await getUserDetailById(
-        supabase,
-        user_id,
-        user_detail_id
-      );
+      const detailResult = await getUserDetailById(supabase, user_id, user_detail_id);
       if (detailResult.ok && detailResult.data) {
         userDetail = detailResult.data;
       }

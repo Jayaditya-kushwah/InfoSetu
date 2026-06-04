@@ -48,9 +48,7 @@ export function useUserProfiles(): UseUserProfilesResult {
         | { error: string };
 
       if (!response.ok) {
-        throw new Error(
-          "error" in data ? data.error : "Failed to load user profiles"
-        );
+        throw new Error("error" in data ? data.error : "Failed to load user profiles");
       }
 
       if ("user_id" in data) {
@@ -66,9 +64,7 @@ export function useUserProfiles(): UseUserProfilesResult {
           return nextProfiles.find((profile) => profile.id === current.id) ?? current;
         }
         return (
-          nextProfiles.find((profile) => profile.is_active) ??
-          nextProfiles[0] ??
-          null
+          nextProfiles.find((profile) => profile.is_active) ?? nextProfiles[0] ?? null
         );
       });
     } catch (err) {
@@ -92,14 +88,11 @@ export function useUserProfiles(): UseUserProfilesResult {
       const storedUserId = getStoredUserId();
       if (!storedUserId) return;
 
-      const response = await fetch(
-        `/api/user/details/${profile.id}/set-active`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ user_id: storedUserId }),
-        }
-      );
+      const response = await fetch(`/api/user/details/${profile.id}/set-active`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user_id: storedUserId }),
+      });
 
       if (!response.ok) {
         const data = (await response.json()) as { error?: string };

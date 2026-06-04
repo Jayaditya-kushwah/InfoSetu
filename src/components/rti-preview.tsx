@@ -97,7 +97,13 @@ export const RTIPreview = forwardRef<HTMLDivElement, RTIPreviewProps>(
           >
             To,
           </p>
-          <div style={{ paddingLeft: "16px", whiteSpace: "pre-line", marginBottom: "14px" }}>
+          <div
+            style={{
+              paddingLeft: "16px",
+              whiteSpace: "pre-line",
+              marginBottom: "14px",
+            }}
+          >
             {draft.to}
           </div>
 

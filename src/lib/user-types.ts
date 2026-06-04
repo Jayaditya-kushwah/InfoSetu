@@ -32,11 +32,7 @@ export interface RTIRecord {
   created_at: string;
 }
 
-export type DetailUsageAction =
-  | "created"
-  | "updated"
-  | "deactivated"
-  | "used_in_rti";
+export type DetailUsageAction = "created" | "updated" | "deactivated" | "used_in_rti";
 
 export interface DetailUsageHistory {
   id: string;
@@ -64,6 +60,4 @@ export interface CreateUserDetailResult {
   message: string;
 }
 
-export type DbResult<T> =
-  | { ok: true; data: T }
-  | { ok: false; error: string };
+export type DbResult<T> = { ok: true; data: T } | { ok: false; error: string };

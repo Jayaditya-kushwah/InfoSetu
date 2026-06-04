@@ -4,7 +4,13 @@ import { Search, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 interface SearchResult {
   id: string;
@@ -37,48 +43,51 @@ export function RTISearchPanel({ onResultSelect }: RTISearchPanelProps) {
 
   const limit = 10;
 
-  const handleSearch = useCallback(async (newOffset = 0) => {
-    if (!searchQuery.trim()) {
-      setResults([]);
-      setTotal(0);
-      setHasSearched(false);
-      return;
-    }
+  const handleSearch = useCallback(
+    async (newOffset = 0) => {
+      if (!searchQuery.trim()) {
+        setResults([]);
+        setTotal(0);
+        setHasSearched(false);
+        return;
+      }
 
-    setIsSearching(true);
-    try {
-      const params = new URLSearchParams({
-        q: searchQuery,
-        limit: limit.toString(),
-        offset: newOffset.toString(),
-      });
+      setIsSearching(true);
+      try {
+        const params = new URLSearchParams({
+          q: searchQuery,
+          limit: limit.toString(),
+          offset: newOffset.toString(),
+        });
 
-      if (department.trim()) params.append("department", department);
-      if (category.trim()) params.append("category", category);
+        if (department.trim()) params.append("department", department);
+        if (category.trim()) params.append("category", category);
 
-      const response = await fetch(`/api/rti/search?${params}`);
-      const data = await response.json();
+        const response = await fetch(`/api/rti/search?${params}`);
+        const data = await response.json();
 
-      if (response.ok) {
-        setResults(data.results || []);
-        setTotal(data.total || 0);
-        setOffset(newOffset);
-        setHasSearched(true);
-      } else {
-        console.error("Search failed:", data.error);
+        if (response.ok) {
+          setResults(data.results || []);
+          setTotal(data.total || 0);
+          setOffset(newOffset);
+          setHasSearched(true);
+        } else {
+          console.error("Search failed:", data.error);
+          setResults([]);
+          setTotal(0);
+          setHasSearched(true);
+        }
+      } catch (error) {
+        console.error("Search error:", error);
         setResults([]);
         setTotal(0);
         setHasSearched(true);
+      } finally {
+        setIsSearching(false);
       }
-    } catch (error) {
-      console.error("Search error:", error);
-      setResults([]);
-      setTotal(0);
-      setHasSearched(true);
-    } finally {
-      setIsSearching(false);
-    }
-  }, [searchQuery, department, category, limit]);
+    },
+    [searchQuery, department, category, limit]
+  );
 
   const handleSearchClick = () => {
     setOffset(0);
@@ -111,9 +120,7 @@ export function RTISearchPanel({ onResultSelect }: RTISearchPanelProps) {
       {/* Search Inputs */}
       <div className="space-y-3">
         <div>
-          <label className="text-sm font-medium text-slate-700">
-            Search Keyword
-          </label>
+          <label className="text-sm font-medium text-slate-700">Search Keyword</label>
           <div className="mt-1 flex gap-2">
             <Input
               type="text"

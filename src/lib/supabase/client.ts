@@ -20,8 +20,7 @@ function getProjectRefFromAnonKey(anonKey: string): string | null {
 
 function getSupabaseConfig() {
   const anonKey =
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ??
-    process.env.VITE_SUPABASE_ANON_KEY;
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? process.env.VITE_SUPABASE_ANON_KEY;
 
   if (!anonKey?.trim()) {
     throw new Error(
@@ -31,17 +30,12 @@ function getSupabaseConfig() {
 
   const trimmedKey = anonKey.trim();
   const projectRef = getProjectRefFromAnonKey(trimmedKey);
-  const envUrl =
-    process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
-  const canonicalUrl = projectRef
-    ? `https://${projectRef}.supabase.co`
-    : undefined;
+  const envUrl = process.env.NEXT_PUBLIC_SUPABASE_URL ?? process.env.VITE_SUPABASE_URL;
+  const canonicalUrl = projectRef ? `https://${projectRef}.supabase.co` : undefined;
 
   const url = canonicalUrl ?? envUrl;
   if (!url) {
-    throw new Error(
-      "Missing Supabase URL. Set NEXT_PUBLIC_SUPABASE_URL in .env"
-    );
+    throw new Error("Missing Supabase URL. Set NEXT_PUBLIC_SUPABASE_URL in .env");
   }
 
   return { url, anonKey: trimmedKey };

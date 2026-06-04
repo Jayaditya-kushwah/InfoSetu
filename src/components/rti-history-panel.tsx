@@ -69,9 +69,7 @@ export function RTIHistoryPanel({ profiles, refreshKey = 0 }: RTIHistoryPanelPro
   };
 
   if (isLoading) {
-    return (
-      <p className="text-xs text-slate-500">Loading RTI history…</p>
-    );
+    return <p className="text-xs text-slate-500">Loading RTI history…</p>;
   }
 
   if (error) {

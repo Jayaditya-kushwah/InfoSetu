@@ -65,9 +65,7 @@ export async function testLLMConnection() {
 
   for (const provider of providers) {
     const result =
-      provider === "groq"
-        ? await testGroqConnection()
-        : await testGeminiConnection();
+      provider === "groq" ? await testGroqConnection() : await testGeminiConnection();
     results.push({ provider, ...result });
     if (result.ok) {
       return { provider, ...result, tried: results };
@@ -75,8 +73,7 @@ export async function testLLMConnection() {
   }
 
   const primary =
-    results.find((r) => r.provider === providers[0]) ??
-    results[results.length - 1];
+    results.find((r) => r.provider === providers[0]) ?? results[results.length - 1];
   return {
     provider: providers[0] ?? "gemini",
     ok: false,

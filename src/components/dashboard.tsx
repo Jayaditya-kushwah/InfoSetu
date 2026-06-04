@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  Download,
-  FileText,
-  Loader2,
-  Scale,
-  Shield,
-  UserCircle2,
-} from "lucide-react";
+import { Download, FileText, Loader2, Scale, Shield, UserCircle2 } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 
 import { PrintRTIButton } from "@/components/print-rti-button";
@@ -28,10 +21,7 @@ import {
 } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { useUserProfiles } from "@/hooks/use-user-profiles";
-import {
-  buildRTIPdfFilename,
-  downloadRTIAsPDF,
-} from "@/lib/pdf-export";
+import { buildRTIPdfFilename, downloadRTIAsPDF } from "@/lib/pdf-export";
 import {
   RTI_CATEGORY_LABELS,
   detectRTICategory,
@@ -63,15 +53,9 @@ export function Dashboard() {
   const [detailsModalOpen, setDetailsModalOpen] = useState(false);
   const [onboardingChecked, setOnboardingChecked] = useState(false);
   const [filingStep, setFilingStep] = useState<FilingStep>("input");
-  const [detectedCategory, setDetectedCategory] = useState<RTICategory | null>(
-    null
-  );
-  const [categoryAnswers, setCategoryAnswers] = useState<Record<string, string>>(
-    {}
-  );
-  const [prefilledAnswers, setPrefilledAnswers] = useState<
-    Record<string, string>
-  >({});
+  const [detectedCategory, setDetectedCategory] = useState<RTICategory | null>(null);
+  const [categoryAnswers, setCategoryAnswers] = useState<Record<string, string>>({});
+  const [prefilledAnswers, setPrefilledAnswers] = useState<Record<string, string>>({});
   const [historyRefreshKey, setHistoryRefreshKey] = useState(0);
   const [editingProfile, setEditingProfile] = useState<UserDetail | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
@@ -169,13 +153,10 @@ export function Dashboard() {
     setFilingStep("questionnaire");
   }, [grievance, selectedProfile, loadCategoryAnswers]);
 
-  const handleQuestionnaireSubmit = useCallback(
-    (answers: Record<string, string>) => {
-      setCategoryAnswers(answers);
-      setFilingStep("confirm");
-    },
-    []
-  );
+  const handleQuestionnaireSubmit = useCallback((answers: Record<string, string>) => {
+    setCategoryAnswers(answers);
+    setFilingStep("confirm");
+  }, []);
 
   const handleConfirmGenerate = useCallback(async () => {
     const userInput = grievance.trim();
@@ -214,9 +195,7 @@ export function Dashboard() {
         | { error: string };
 
       if (!response.ok) {
-        throw new Error(
-          "error" in data ? data.error : "Failed to generate RTI draft"
-        );
+        throw new Error("error" in data ? data.error : "Failed to generate RTI draft");
       }
 
       const aiResult = data as GenerateRTIResponse & {
@@ -232,8 +211,7 @@ export function Dashboard() {
       };
 
       let previewDraft =
-        aiResult.draft ??
-        buildDraftFromAIResponse(aiResult, selectedProfile);
+        aiResult.draft ?? buildDraftFromAIResponse(aiResult, selectedProfile);
       previewDraft = injectUserDataIntoDraft(previewDraft, selectedProfile);
 
       setDraft(previewDraft);
@@ -261,13 +239,7 @@ export function Dashboard() {
     } finally {
       setIsGenerating(false);
     }
-  }, [
-    grievance,
-    selectedProfile,
-    detectedCategory,
-    categoryAnswers,
-    resetFilingFlow,
-  ]);
+  }, [grievance, selectedProfile, detectedCategory, categoryAnswers, resetFilingFlow]);
 
   const handleDownload = useCallback(async () => {
     const previewElement =
@@ -283,9 +255,7 @@ export function Dashboard() {
         filename: buildRTIPdfFilename(draft.subject),
       });
     } catch (err) {
-      setDownloadError(
-        err instanceof Error ? err.message : "Failed to generate PDF"
-      );
+      setDownloadError(err instanceof Error ? err.message : "Failed to generate PDF");
     } finally {
       setIsDownloading(false);
     }
@@ -333,9 +303,8 @@ export function Dashboard() {
             Civic Grievance to RTI Draft
           </h2>
           <p className="mt-1 max-w-2xl text-sm text-slate-600">
-            Describe your issue in everyday language. Our Legal Draftsman Agent
-            converts it into a formal, rejection-proof RTI application ready for
-            submission.
+            Describe your issue in everyday language. Our Legal Draftsman Agent converts
+            it into a formal, rejection-proof RTI application ready for submission.
           </p>
         </div>
 
@@ -359,8 +328,8 @@ export function Dashboard() {
                 Your Grievance
               </CardTitle>
               <CardDescription>
-                Write freely in English or Hindi (हिंदी). Emotional language
-                is filtered; only factual requests are included.
+                Write freely in English or Hindi (हिंदी). Emotional language is
+                filtered; only factual requests are included.
               </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-1 flex-col gap-4 pt-6">
@@ -453,9 +422,7 @@ export function Dashboard() {
             <CardHeader className="border-b border-slate-100 bg-slate-50/50">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <CardTitle className="text-slate-900">
-                    Official RTI Preview
-                  </CardTitle>
+                  <CardTitle className="text-slate-900">Official RTI Preview</CardTitle>
                   <CardDescription>
                     Review your draft before downloading. Routed department is
                     auto-detected.
@@ -499,8 +466,8 @@ export function Dashboard() {
                       Your RTI draft will appear here
                     </p>
                     <p className="mt-1 max-w-xs text-sm text-slate-400">
-                      Enter your grievance, answer RTI-specific questions, confirm
-                      your details, then download the final draft.
+                      Enter your grievance, answer RTI-specific questions, confirm your
+                      details, then download the final draft.
                     </p>
                   </div>
                 )}

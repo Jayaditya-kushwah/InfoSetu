@@ -10,10 +10,7 @@ export const userDetailSchema = z.object({
     .trim()
     .min(2, "Full name must be at least 2 characters")
     .max(100, "Full name must be at most 100 characters")
-    .regex(
-      FULL_NAME_REGEX,
-      "Full name may only contain letters, spaces, and . ' -"
-    ),
+    .regex(FULL_NAME_REGEX, "Full name may only contain letters, spaces, and . ' -"),
   email: z
     .string()
     .trim()
@@ -49,9 +46,7 @@ export const createUserDetailRequestSchema = userDetailSchema.extend({
 export const updateUserDetailRequestSchema = userDetailSchema.partial();
 
 export type UserDetailFormValues = z.infer<typeof userDetailSchema>;
-export type CreateUserDetailRequest = z.infer<
-  typeof createUserDetailRequestSchema
->;
+export type CreateUserDetailRequest = z.infer<typeof createUserDetailRequestSchema>;
 
 export function formatZodErrors(error: z.ZodError): Record<string, string> {
   const fieldErrors: Record<string, string> = {};

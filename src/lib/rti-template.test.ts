@@ -1,10 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { buildDraftFromAIResponse } from "@/lib/rti-types";
-import {
-  buildApplicantBlock,
-  injectUserDataIntoDraft,
-} from "@/lib/rti-template";
+import { buildApplicantBlock, injectUserDataIntoDraft } from "@/lib/rti-template";
 import type { UserDetail } from "@/lib/user-types";
 
 const sampleProfile: UserDetail = {

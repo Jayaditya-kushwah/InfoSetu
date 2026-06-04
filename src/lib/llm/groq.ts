@@ -36,9 +36,7 @@ async function callGroq(userInput: string, apiKey: string): Promise<string> {
   };
 
   if (!response.ok) {
-    throw new Error(
-      payload.error?.message ?? `Groq API error (${response.status})`
-    );
+    throw new Error(payload.error?.message ?? `Groq API error (${response.status})`);
   }
 
   const content = payload.choices?.[0]?.message?.content;
