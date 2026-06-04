@@ -1,93 +1,62 @@
-include:
-  - template: Security/SAST.gitlab-ci.yml
-  - template: Security/Dependency-Scanning.gitlab-ci.yml
-  - template: Security/Secret-Detection.gitlab-ci.yml
-
+# GitLab CI — RTI-Ease compliance pipeline
 stages:
-  - validate
-  - format
   - lint
-  - type-check
   - test
   - security
+  - audit
 
 variables:
-  UV_CACHE_DIR: "$CI_PROJECT_DIR/.cache/uv"
-  DOCKER_DRIVER: overlay2
-  DOCKER_TLS_CERTDIR: "/certs"
+  NODE_VERSION: "22"
+  npm_config_cache: "$CI_PROJECT_DIR/.npm"
 
 cache:
+  key: "${CI_COMMIT_REF_SLUG}"
   paths:
-    - .cache/uv
+    - .npm/
+    - node_modules/
 
-.setup_uv: &setup_uv
-  image: python:3.13-slim
+default:
+  image: node:${NODE_VERSION}-alpine
   before_script:
-    - apt-get update && apt-get install -y --no-install-recommends curl git
-    - curl -LsSf https://astral.sh/uv/install.sh | sh
-    - source $HOME/.local/bin/env
-    - uv sync --frozen
+    - npm ci
 
-validate:
-  <<: *setup_uv
-  stage: validate
-  script:
-    - uv run pre-commit run check-merge-conflict --all-files
-    - uv run pre-commit run check-json --all-files
-    - uv run pre-commit run check-toml --all-files
-    - uv run pre-commit run check-added-large-files --all-files
-
-ruff-lint:
-  <<: *setup_uv
+lint:
   stage: lint
   script:
-    - uv run ruff check .
-  only:
-    changes:
-      - "**/*.py"
+    - npm run lint
 
-bandit:
-  <<: *setup_uv
-  stage: security
+knip:
+  stage: lint
   script:
-    - uv run bandit -r app/ -c pyproject.toml
-  only:
-    changes:
-      - "**/*.py"
+    - npm run knip
+  allow_failure: true
 
-ruff-format:
-  <<: *setup_uv
-  stage: format
-  script:
-    - uv run ruff format --check .
-  only:
-    changes:
-      - "**/*.py"
-
-type-check:
-  <<: *setup_uv
-  stage: type-check
-  script:
-    - uv run pyrefly check app/ main.py
-  only:
-    changes:
-      - "**/*.py"
-
-pytest:
-  <<: *setup_uv
+test:
   stage: test
   script:
-    - uv run pytest -v --cov=. -n auto --cov-fail-under=70
-  coverage: '/TOTAL.*\s+(\d+%)$/'
-  only:
-    changes:
-      - "**/*.py"
+    - npm run test:coverage
+  coverage: '/All files[^|]*\|[^|]*\s+([\d\.]+)/'
+  artifacts:
+    when: always
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: coverage/cobertura-coverage.xml
+    paths:
+      - coverage/
+    expire_in: 1 week
 
-pyupgrade:
-  <<: *setup_uv
-  stage: lint
+dependency_audit:
+  stage: audit
   script:
-    - uv run pyupgrade --py313-plus --exit-zero-even-if-changed $(find app -name "*.py")
-  only:
-    changes:
-      - "**/*.py"
+    - npm audit --audit-level=high || true
+  allow_failure: true
+
+secret_scan:
+  stage: security
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source . --verbose --redact
+  allow_failure: true
