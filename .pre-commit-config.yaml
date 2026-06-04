@@ -27,3 +27,17 @@ repos:
         language: system
         pass_filenames: false
         files: \.(ts|tsx|js|jsx|mjs)$
+
+      - id: prettier
+        name: prettier
+        entry: npx prettier --check --ignore-unknown
+        language: system
+        pass_filenames: true
+        files: \.(ts|tsx|js|jsx|mjs|json|css|md|yaml|yml)$
+
+      - id: type-check
+        name: type-check
+        entry: npx tsc --noEmit
+        language: system
+        pass_filenames: false
+        files: \.(ts|tsx)$

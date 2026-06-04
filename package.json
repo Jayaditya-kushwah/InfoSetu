@@ -9,6 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --noEmit",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "test": "vitest run",
