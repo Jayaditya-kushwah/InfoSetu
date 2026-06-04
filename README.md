@@ -12,12 +12,12 @@ InfoSetu was built and developed as part of the **First Hackathon in Swecha Inte
 
 ### Project Ideation Matrix
 
-| Column | Details |
-| :--- | :--- |
-| **Problem Statement** | Indian citizens face significant barriers when attempting to exercise their constitutional right to information. Legitimate public requests are frequently delayed, ignored, or rejected outright due to improper formatting, missing procedural data, complex legal terminology, and confusion regarding which specific Public Information Officer (PIO) or department holds jurisdiction over the matter. |
-| **Current Method of Things** | Currently, citizens must manually draft physical or digital applications using rigid formal legalese. They are forced to independently research massive bureaucratic hierarchies to map their issue to the correct department. This process lacks automated validation, resulting in high overhead, error-prone entries, and widespread accessibility barriers for non-legal experts. |
-| **Our Solution** | InfoSetu provides an AI-native conversational wizard that abstracts legal complexities away from the end-user. It processes everyday language grievances, uses an adaptive questioning engine to dynamically extract missing structural details, automatically runs classification models to route the issue to the correct administrative authority, and compiles a submission-ready, legally conforming PDF built for immediate upload or postage. |
-| **How We Could Make It Better Even Further** | Future enhancements will focus on deploying localized multi-lingual LLM support to cater to regional Indian languages, integrating automated speech-to-text capabilities for increased accessibility, building a direct digital API pipeline with government portals for automated single-click submissions, and introducing autonomous agent-driven tracking systems to monitor legal response deadlines. |
+| Column                                       | Details                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| :------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Problem Statement**                        | Indian citizens face significant barriers when attempting to exercise their constitutional right to information. Legitimate public requests are frequently delayed, ignored, or rejected outright due to improper formatting, missing procedural data, complex legal terminology, and confusion regarding which specific Public Information Officer (PIO) or department holds jurisdiction over the matter.                                          |
+| **Current Method of Things**                 | Currently, citizens must manually draft physical or digital applications using rigid formal legalese. They are forced to independently research massive bureaucratic hierarchies to map their issue to the correct department. This process lacks automated validation, resulting in high overhead, error-prone entries, and widespread accessibility barriers for non-legal experts.                                                                |
+| **Our Solution**                             | InfoSetu provides an AI-native conversational wizard that abstracts legal complexities away from the end-user. It processes everyday language grievances, uses an adaptive questioning engine to dynamically extract missing structural details, automatically runs classification models to route the issue to the correct administrative authority, and compiles a submission-ready, legally conforming PDF built for immediate upload or postage. |
+| **How We Could Make It Better Even Further** | Future enhancements will focus on deploying localized multi-lingual LLM support to cater to regional Indian languages, integrating automated speech-to-text capabilities for increased accessibility, building a direct digital API pipeline with government portals for automated single-click submissions, and introducing autonomous agent-driven tracking systems to monitor legal response deadlines.                                           |
 
 ---
 
@@ -52,14 +52,14 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Development server |
-| `npm run build` | Production build |
-| `npm test` | Run unit tests |
-| `npm run test:coverage` | Tests with coverage report |
-| `npm run lint` | ESLint |
-| `npm run check-health` | Verify LLM + Supabase connectivity |
+| Command                 | Description                        |
+| ----------------------- | ---------------------------------- |
+| `npm run dev`           | Development server                 |
+| `npm run build`         | Production build                   |
+| `npm test`              | Run unit tests                     |
+| `npm run test:coverage` | Tests with coverage report         |
+| `npm run lint`          | ESLint                             |
+| `npm run check-health`  | Verify LLM + Supabase connectivity |
 
 ## Documentation
 
@@ -76,40 +76,43 @@ Open [http://localhost:3000](http://localhost:3000).
 
 The codebase isolates front-end layouts, background workflows, AI prompt layers, and database operations into dedicated functional modules:
 
-* **scripts/** -> Integration health checks and diagnostic utilities
-  * `check-api.mjs`
-  * `check-health.mjs`
-* **supabase/** -> Database migrations and backend trigger logic
-  * `setup.sql` -> Primary schema definitions and initialization configurations
-  * `rti-adaptive.sql` -> Custom profiling layouts and user data mapping
-* **src/app/api/** -> Serverless Application Routing
-  * `health/route.ts` -> Status and connectivity endpoint
-  * `generate-rti/route.ts` -> Handles profile payload assembly and document validation
-  * `rti/categorize/route.ts` -> Automated backend sorting for target government departments
-  * `user/` -> Context routes handling user profile data operations
-* **src/components/** -> UI Interface Modules
-  * `dashboard.tsx` -> The primary user workspace and dashboard container
-  * `rti-confirm-screen.tsx` -> Final proofing view with an integrated rich-text interface
-  * `rti-history-panel.tsx` -> Interactive grid displaying a user's previous filings
-  * `user-detail/` -> Interactive modals and input fields for identity updates
-* **src/hooks/** -> Custom React Lifecycle Hooks
-  * `use-user-profiles.ts` -> Client-side state hook abstraction managing profile database queries
-* **src/lib/** -> Core Utilities & Static Assets
-  * `prompts.ts` -> Master LLM instruction sets and context rules
-  * `rti-categories.ts` -> Structured indexes of target government departments
-  * `rti-template.ts` -> Standard legal layout parameters and text injection parsers
+- **scripts/** -> Integration health checks and diagnostic utilities
+  - `check-api.mjs`
+  - `check-health.mjs`
+- **supabase/** -> Database migrations and backend trigger logic
+  - `setup.sql` -> Primary schema definitions and initialization configurations
+  - `rti-adaptive.sql` -> Custom profiling layouts and user data mapping
+- **src/app/api/** -> Serverless Application Routing
+  - `health/route.ts` -> Status and connectivity endpoint
+  - `generate-rti/route.ts` -> Handles profile payload assembly and document validation
+  - `rti/categorize/route.ts` -> Automated backend sorting for target government departments
+  - `user/` -> Context routes handling user profile data operations
+- **src/components/** -> UI Interface Modules
+  - `dashboard.tsx` -> The primary user workspace and dashboard container
+  - `rti-confirm-screen.tsx` -> Final proofing view with an integrated rich-text interface
+  - `rti-history-panel.tsx` -> Interactive grid displaying a user's previous filings
+  - `user-detail/` -> Interactive modals and input fields for identity updates
+- **src/hooks/** -> Custom React Lifecycle Hooks
+  - `use-user-profiles.ts` -> Client-side state hook abstraction managing profile database queries
+- **src/lib/** -> Core Utilities & Static Assets
+  - `prompts.ts` -> Master LLM instruction sets and context rules
+  - `rti-categories.ts` -> Structured indexes of target government departments
+  - `rti-template.ts` -> Standard legal layout parameters and text injection parsers
 
 ---
 
 ## Local Development Setup
 
 ### 1. Prerequisites
+
 Ensure your machine has the following tools installed:
-* Node.js (v18.x or above)
-* A package manager like npm or yarn
-* A running Supabase instance (either via local Docker containers or hosted cloud project)
+
+- Node.js (v18.x or above)
+- A package manager like npm or yarn
+- A running Supabase instance (either via local Docker containers or hosted cloud project)
 
 ### 2. Environment Configuration (`.env.local`)
+
 Create a `.env.local` configuration file in the project root and provide your service credentials:
 
 ```env
@@ -119,12 +122,14 @@ OPENAI_API_KEY=your_openai_or_llm_provider_secret_token
 ```
 
 ### 3. Schema Setup
+
 Run the setup queries directly inside your Supabase SQL Editor to provision the necessary tables and constraints:
 
 1. Copy and execute the contents of `supabase/setup.sql` to build the foundational architecture.
 2. Execute the contents of `supabase/rti-adaptive.sql` to initialize the dynamic profiling features.
 
 ### 4. Running the Project Locally
+
 Initialize dependencies and boot up the local server with the following terminal commands:
 
 ```bash
@@ -140,9 +145,9 @@ Navigate to `http://localhost:3000` in your web browser to test the local interf
 
 The system includes pre-deployment validation tools to check system health and API functionality:
 
-* Execute the suite of unit tests: `npm run test`
-* Verify external API service availability: `node scripts/check-health.mjs`
-* Check pipeline parameter integrations: `node scripts/check-api.mjs`
+- Execute the suite of unit tests: `npm run test`
+- Verify external API service availability: `node scripts/check-health.mjs`
+- Check pipeline parameter integrations: `node scripts/check-api.mjs`
 
 ---
 
@@ -160,12 +165,12 @@ Please run `npm run lint` to enforce formatting guidelines before pushing commit
 
 ## Contributors
 
-* **Shreyas** — **Frontend Adaptations Layout**
-  * Engineered the interactive multi-step dashboard shell (`dashboard.tsx`) and verification boundary. Implemented the text editing suite inside `rti-confirm-screen.tsx`, built modular identity update forms within `user-detail/`, and handled client-side UI state tracking.
-* **Jayaditya** — **Core AI & Categorization Engine**
-  * Authored system context anchors, instructional prompt logic, and evaluation boundaries within `prompts.ts`. Programmed the asynchronous serverless categorization engine (`api/rti/categorize/route.ts`) and engineered algorithmic data parsing fallback patterns.
-* **Arrya Sridhar** — **Backend Infrastructure & Database Routing**
-  * Built foundational Supabase database migrations (`setup.sql`), established secure table triggers, deployed adaptive profile schema definitions (`rti-adaptive.sql`), and developed the relational query interface hook `use-user-profiles.ts`.
+- **Shreyas** — **Frontend Adaptations Layout**
+  - Engineered the interactive multi-step dashboard shell (`dashboard.tsx`) and verification boundary. Implemented the text editing suite inside `rti-confirm-screen.tsx`, built modular identity update forms within `user-detail/`, and handled client-side UI state tracking.
+- **Jayaditya** — **Core AI & Categorization Engine**
+  - Authored system context anchors, instructional prompt logic, and evaluation boundaries within `prompts.ts`. Programmed the asynchronous serverless categorization engine (`api/rti/categorize/route.ts`) and engineered algorithmic data parsing fallback patterns.
+- **Arrya Sridhar** — **Backend Infrastructure & Database Routing**
+  - Built foundational Supabase database migrations (`setup.sql`), established secure table triggers, deployed adaptive profile schema definitions (`rti-adaptive.sql`), and developed the relational query interface hook `use-user-profiles.ts`.
 
 ---
 
