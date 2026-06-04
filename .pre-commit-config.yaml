@@ -11,10 +11,11 @@ repos:
         args: ["--maxkb=500"]
       - id: detect-private-key
       - id: detect-aws-credentials
+        args: [--allow-missing-credentials]
       - id: check-merge-conflict
 
   - repo: https://github.com/gitleaks/gitleaks
-    rev: v8.22.1
+    rev: v8.24.3
     hooks:
       - id: gitleaks
 
