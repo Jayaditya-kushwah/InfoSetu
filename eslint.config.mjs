@@ -7,4 +7,9 @@ const __dirname = dirname(__filename);
 
 const compat = new FlatCompat({ baseDirectory: __dirname });
 
-export default [...compat.extends("next/core-web-vitals")];
+const eslintConfig = [
+  { ignores: ["coverage/**", ".next/**", "node_modules/**"] },
+  ...compat.extends("next/core-web-vitals"),
+];
+
+export default eslintConfig;

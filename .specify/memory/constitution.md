@@ -22,7 +22,7 @@ RTI applications.
 | Decision           | Choice                  | Rationale                   |
 | ------------------ | ----------------------- | --------------------------- |
 | Frontend Framework | Next.js 15 (App Router) | SSR + SEO for public pages  |
-| AI Provider        | Google Gemini           | Multi-model flexibility     |
+| AI Provider        | Groq / Gemini           | Multi-model flexibility     |
 | Auth & DB          | Supabase                | OSS-friendly, self-hostable |
 | Styling            | Tailwind CSS v4         | Rapid prototyping           |
 | Testing            | Vitest                  | Fast, TS-native             |

@@ -16,6 +16,9 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "knip": "knip",
+    "biome": "biome check .",
+    "oxlint": "oxlint .",
+    "prepare": "husky",
     "audit": "npm audit --audit-level=high",
     "check-api": "node scripts/check-api.mjs",
     "check-health": "node scripts/check-health.mjs"
@@ -36,9 +39,13 @@
     "zod": "^3.25.76"
   },
   "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
     "@vitest/coverage-v8": "^3.2.4",
     "@eslint/eslintrc": "^3.3.1",
     "@tailwindcss/postcss": "^4.1.8",
+    "husky": "^9.1.7",
+    "oxlint": "^0.16.4",
+    "postcss": "^8.5.3",
     "@types/node": "^22.15.29",
     "@types/react": "^19.1.6",
     "@types/react-dom": "^19.1.5",

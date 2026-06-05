@@ -37,7 +37,21 @@ repos:
 
       - id: type-check
         name: type-check
-        entry: npx tsc --noEmit
+        entry: npm run type-check
         language: system
         pass_filenames: false
-        files: \.(ts|tsx)$
+        always_run: true
+
+      - id: biome
+        name: biome
+        entry: npm run biome
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: oxlint
+        name: oxlint
+        entry: npm run oxlint
+        language: system
+        pass_filenames: false
+        always_run: true

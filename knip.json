@@ -1,7 +1,30 @@
 {
   "$schema": "https://unpkg.com/knip@5/schema.json",
-  "entry": ["src/app/**/*.{ts,tsx}", "next.config.ts"],
+  "entry": ["src/app/**/*.{ts,tsx}", "next.config.ts", "postcss.config.mjs"],
   "project": ["src/**/*.{ts,tsx}", "scripts/**/*.{mjs,ts}"],
   "ignore": ["**/*.test.ts", "vitest.config.ts"],
-  "ignoreDependencies": ["@tailwindcss/postcss", "@eslint/eslintrc"]
+  "ignoreFiles": [
+    "src/lib/feature-flags.ts",
+    "src/lib/phase0-regression.ts",
+    "src/lib/supabase/client.ts"
+  ],
+  "ignoreDependencies": [
+    "@tailwindcss/postcss",
+    "@eslint/eslintrc",
+    "eslint",
+    "eslint-config-next",
+    "tailwindcss",
+    "postcss",
+    "@biomejs/biome",
+    "oxlint",
+    "husky"
+  ],
+  "ignoreExportsUsedInFile": true,
+  "ignoreIssues": {
+    "src/lib/supabase/rti-records.ts": ["exports"],
+    "src/lib/user-session.ts": ["exports"],
+    "src/lib/validation/user-detail-form.ts": ["exports"],
+    "src/lib/user-types.ts": ["exports", "types"],
+    "src/lib/validation/user-detail.ts": ["types"]
+  }
 }

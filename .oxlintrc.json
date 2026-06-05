@@ -1,0 +1,6 @@
+{
+  "rules": {
+    "no-unused-vars": "warn"
+  },
+  "ignorePatterns": ["coverage/**", ".next/**", "node_modules/**"]
+}

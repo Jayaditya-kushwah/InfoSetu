@@ -26,6 +26,8 @@ lint:
   stage: lint
   script:
     - npx eslint . --max-warnings=0
+    - npm run biome
+    - npm run oxlint
 
 knip:
   stage: lint

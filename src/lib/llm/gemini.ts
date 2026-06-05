@@ -3,7 +3,6 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import {
   friendlyLLMError,
   isAuthError,
-  isQuotaOrRateLimitError,
   isValidGeminiKey,
   localFallback,
   parseAIResponse,
